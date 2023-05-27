@@ -18,6 +18,7 @@ const getAll = () => {
 const get = (id) => {
   console.log('getting ONE from users...')
   const request = axios.get(`${baseUrl}/${id}`)
+  // console.log('got ONE from users...',response.data)
   return request.then((response) => response.data)
 }
 

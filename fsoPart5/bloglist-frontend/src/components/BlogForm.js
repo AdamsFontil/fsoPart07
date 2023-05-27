@@ -21,11 +21,15 @@ const BlogForm = ({ createBlog }) => {
   }
 
   return (
-    <form onSubmit={handleBlogSubmit}>
-      <h2>create new</h2>
+    <form
+      className=" flex text-lg gap-4 flex-col items-start w-full"
+      onSubmit={handleBlogSubmit}
+    >
+      <h2 className="text-4xl">create new</h2>
       <div>
         title:{' '}
         <input
+          className="border-2 rounded-md"
           id="title"
           name="title"
           value={newBlog.title}
@@ -35,6 +39,7 @@ const BlogForm = ({ createBlog }) => {
       <div>
         author:{' '}
         <input
+          className="border-2 rounded-md"
           id="author"
           name="author"
           value={newBlog.author}
@@ -44,13 +49,19 @@ const BlogForm = ({ createBlog }) => {
       <div>
         url:{' '}
         <input
+          className="border-2 rounded-md"
           id="url"
           name="url"
           value={newBlog.url}
           onChange={handleBlogChange}
         />
       </div>
-      <button type="submit">Create</button>
+      <button
+        className="text-xl bg-emerald-500 p-1 border-2 rounded-md my-2"
+        type="submit"
+      >
+        Create
+      </button>
     </form>
   )
 }

@@ -80,37 +80,42 @@ const Blogs = () => {
   }
 
   return (
-    <div style={blogStyle} className="blog">
-      <div>
+    <div style={blogStyle} className="blog p-5 flex gap-5 flex-col text-3xl">
+      <div className="flex flex-col gap-3 ">
+        <h3 className="text-5xl">Info</h3>
         <div>
-          <h3>{blog.title}</h3>
+          <h3>Title: {blog.title}</h3>
         </div>
         <div>
           <a href={blog.url} target="_blank" rel="noreferrer">
-            {blog.url}
+            URL: {blog.url}
           </a>
         </div>
-        <div>
-          likes {likes}
-          <button onClick={handleLikeClick} className="likeBtn">
+        <div className="flex gap-3">
+          {likes} likes
+          <button onClick={handleLikeClick} className="likeBtn btn">
             like
           </button>
         </div>
-        <div>{blog.author}</div>
+        <div>Written by: {blog.author}</div>
       </div>
-      <div>
-        <h4>comments</h4>
-        <label>
-          <input
-            type="text"
-            value={newComment}
-            onChange={handleCommentChange}
-          />
-        </label>
-        <button onClick={handleCommentSubmit}>add comment</button>
+      <div className="flex flex-col gap-5">
+        <h4 className="text-5xl mr-3">Comments:</h4>
+        <div>
+          <label className="pr-5">
+            <input
+              type="text"
+              value={newComment}
+              onChange={handleCommentChange}
+            />
+          </label>
+          <button onClick={handleCommentSubmit}>add comment</button>
+        </div>
         <ul>
           {comments.map((comment, index) => (
-            <li key={index}>{comment.content}</li>
+            <li key={index} className="chat chat-start">
+              <div className="chat-bubble">{comment.content}</div>
+            </li>
           ))}
         </ul>
       </div>

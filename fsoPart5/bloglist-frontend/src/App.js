@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 
 import { useQuery, useMutation, useQueryClient } from 'react-query'
-import Blogs from './components/Blogs'
+// import Blogs from './components/Blogs'
 import blogService from './services/blogs'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
@@ -118,49 +118,69 @@ const App = () => {
 
   if (user === null) {
     return (
-      <div className="bg-orange-300 flex flex-col align-center justify-center p-10 text-4xl">
-        <h2>Log in to application</h2>
+      <div className="bg-primary text-2xl text-black w-full">
         <Notification />
-        <form onSubmit={handleLogin}>
-          <div>
-            username
-            <input
-              type="text"
-              id="username"
-              value={username}
-              name="Username"
-              onChange={({ target }) => setUsername(target.value)}
-            />
-          </div>
-          <div>
-            password
-            <input
-              type="password"
-              id="password"
-              value={password}
-              name="Password"
-              onChange={({ target }) => setPassword(target.value)}
-            />
-          </div>
-          <button type="submit" id="login-button">
-            login
-          </button>
-        </form>
+        <div className="flex flex-col justify-center items-center h-screen text-5xl p-5 gap-5">
+          <h2 className="text-7xl">Log in to application</h2>
+          <form className="flex gap-5 flex-col p-3" onSubmit={handleLogin}>
+            <div className="flex gap-3 ">
+              username
+              <input
+                className="border-2 rounded-md text-primary bg-white"
+                type="text"
+                id="username"
+                value={username}
+                name="Username"
+                onChange={({ target }) => setUsername(target.value)}
+              />
+            </div>
+            <div className="flex gap-4">
+              password
+              <input
+                className="border-2 rounded-md text-primary bg-white"
+                type="password"
+                id="password"
+                value={password}
+                name="Password"
+                onChange={({ target }) => setPassword(target.value)}
+              />
+            </div>
+            <button
+              className="border-2 rounded-md p-2 bg-gray-400 hover:bg-gray-500 w-full"
+              type="submit"
+              id="login-button"
+            >
+              login
+            </button>
+          </form>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="bg-primary text-orange-300">
-      <h2>blogs</h2>
+    <div className="bg-emerald-500 text-2xl p-5 text-slate-900">
       <Notification />
       <Router>
-        <div className="links">
-          <Link to="/blogs">blogs</Link>
-          <Link to="/users">users</Link>
-          <p>
-            {user.name} logged in <button onClick={handleLogout}>logout</button>
-          </p>
+        <div className="flex gap-5 text-xl justify-between">
+          <Link to="/blogs">
+            <h2 className="btn btn-ghost normal-case text-4xl">Best Blogs</h2>
+          </Link>
+
+          <div className="links flex gap-5">
+            <Link className="btn" to="/blogs">
+              blogs
+            </Link>
+            <Link className="btn" to="/users">
+              users
+            </Link>
+            <p className="flex justify-center items-center gap-5">
+              {user.name} logged in{' '}
+              <button className="btn btn-secondary " onClick={handleLogout}>
+                logout
+              </button>
+            </p>
+          </div>
         </div>
 
         <Routes>
@@ -175,11 +195,38 @@ const App = () => {
                 <Togglable buttonLabel="create new blog" ref={blogFormRef}>
                   <BlogForm createBlog={addBlog} />
                 </Togglable>
-                {blogs
+                {/* {blogs
                   .sort((a, b) => b.likes - a.likes)
                   .map((blog) => (
                     <Blogs key={blog.id} blog={blog} blogs={blogs} />
-                  ))}
+                  ))} */}
+                <div className="overflow-x-auto">
+                  <table className="table table-normal w-full">
+                    {/* head */}
+                    <thead>
+                      <tr className="">
+                        <th className="">Likes</th>
+                        <th className="">Name</th>
+                        <th>Author</th>
+                        <th>Link</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {blogs
+                        .sort((a, b) => b.likes - a.likes)
+                        .map((blog) => (
+                          <tr key={blog.id}>
+                            <th className="bg-white">{blog.likes}</th>
+                            <td className="bg-white">
+                              <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+                            </td>
+                            <td className="bg-white">{blog.author}</td>
+                            <td className="bg-white">{blog.url}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             }
           />
