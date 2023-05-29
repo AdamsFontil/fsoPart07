@@ -163,12 +163,14 @@ const App = () => {
       <Notification />
       <Router>
         <div className="flex gap-5 text-xl justify-between">
-          <Link to="/blogs">
-            <h2 className="btn btn-ghost normal-case text-4xl">Best Blogs</h2>
+          <Link to="/">
+            <h2 className="btn btn-ghost normal-case text-neutral text-4xl">
+              Best Blogs
+            </h2>
           </Link>
 
           <div className="links flex gap-5">
-            <Link className="btn" to="/blogs">
+            <Link className="btn" to="/">
               blogs
             </Link>
             <Link className="btn" to="/users">
@@ -189,7 +191,7 @@ const App = () => {
           <Route path="/users/:id" element={<UserBlogs />} />
           <Route path="/blogs/:id" element={<OneBlog />} />
           <Route
-            path="/blogs"
+            path="/"
             element={
               <div className="">
                 <Togglable buttonLabel="create new blog" ref={blogFormRef}>
